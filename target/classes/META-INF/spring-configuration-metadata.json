@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "data-sources",
+      "type": "com.example.aggregator.config.DataSourceProperties",
+      "sourceType": "com.example.aggregator.config.DataSourceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "data-sources.sources",
+      "type": "java.util.List<com.example.aggregator.config.DataSourceProperties$DataSource>",
+      "sourceType": "com.example.aggregator.config.DataSourceProperties"
+    }
+  ],
+  "hints": []
+}
