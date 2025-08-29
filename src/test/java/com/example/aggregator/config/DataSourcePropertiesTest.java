@@ -47,6 +47,7 @@ class DataSourcePropertiesTest {
 
   @EnableConfigurationProperties(DataSourceProperties.class)
   static class TestConfig {
+
   }
 }
 

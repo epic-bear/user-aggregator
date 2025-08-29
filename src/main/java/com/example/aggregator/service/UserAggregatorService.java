@@ -20,8 +20,8 @@ public class UserAggregatorService {
     List<UserDto> allUsers = new ArrayList<>();
 
     for (DataSourceProperties.DataSource source : properties.getSources()) {
-        UserClient client = new UserClient(source);
-        allUsers.addAll(client.fetchUsers());
+      UserClient client = new UserClient(source);
+      allUsers.addAll(client.fetchUsers());
     }
 
     return allUsers;

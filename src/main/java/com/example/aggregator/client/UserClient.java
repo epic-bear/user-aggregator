@@ -21,7 +21,8 @@ public class UserClient {
 
     String query = String.format("SELECT * FROM %s", config.getTable());
 
-    try (Connection conn = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
+    try (Connection conn = DriverManager
+        .getConnection(config.getUrl(), config.getUser(), config.getPassword());
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query)) {
 

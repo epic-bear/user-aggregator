@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "data-sources")
 @Data
 public class DataSourceProperties {
+
   private List<DataSource> sources;
 
   @Data
   public static class DataSource {
+
     private String name;
     private String strategy;
     private String url;
