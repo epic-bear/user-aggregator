@@ -16,22 +16,22 @@ public class UserClient {
   }
 
   public List<UserDto> fetchUsers() {
-    List<UserDto> users = new ArrayList<>();
+    List<UserDto> allUsers = new ArrayList<>();
     Map<String, String> map = config.getMapping();
 
     String query = String.format("SELECT * FROM %s", config.getTable());
 
     try (Connection conn = DriverManager
         .getConnection(config.getUrl(), config.getUser(), config.getPassword());
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query)) {
+        Statement statement = conn.createStatement();
+        ResultSet usersSet = statement.executeQuery(query)) {
 
-      while (rs.next()) {
-        users.add(new UserDto(
-            rs.getString(map.get("id")),
-            rs.getString(map.get("username")),
-            rs.getString(map.get("name")),
-            rs.getString(map.get("surname"))
+      while (usersSet.next()) {
+        allUsers.add(new UserDto(
+            usersSet.getString(map.get("id")),
+            usersSet.getString(map.get("username")),
+            usersSet.getString(map.get("name")),
+            usersSet.getString(map.get("surname"))
         ));
       }
 
@@ -39,7 +39,7 @@ public class UserClient {
       System.err.println("Error fetching users from " + config.getName() + ": " + e.getMessage());
     }
 
-    return users;
+    return allUsers;
   }
 }
 

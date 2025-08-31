@@ -1,6 +1,5 @@
 package com.example.aggregator.config;
 
-import com.example.aggregator.config.DataSourceProperties;
 import com.example.aggregator.config.DataSourceProperties.DataSource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
