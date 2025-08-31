@@ -1,5 +1,7 @@
 package com.example.aggregator.service;
 
+import com.example.aggregator.client.UserClient;
+import com.example.aggregator.client.UserClientFactory;
 import com.example.aggregator.dto.UserDto;
 import com.example.aggregator.config.DataSourceProperties;
 import org.junit.jupiter.api.Test;
@@ -28,11 +30,21 @@ class UserAggregatorServiceTest {
     DataSourceProperties mockProps = Mockito.mock(DataSourceProperties.class);
     Mockito.when(mockProps.getSources()).thenReturn(List.of(source1, source2));
 
-    UserAggregatorService service = Mockito.mock(UserAggregatorService.class);
-    Mockito.when(service.aggregateUsers()).thenReturn(List.of(
-        new UserDto("1", "alice", "Alice", "Smith"),
+    UserClient client1 = Mockito.mock(UserClient.class);
+    Mockito.when(client1.fetchUsers()).thenReturn(List.of(
+        new UserDto("1", "alice", "Alice", "Smith")
+    ));
+
+    UserClient client2 = Mockito.mock(UserClient.class);
+    Mockito.when(client2.fetchUsers()).thenReturn(List.of(
         new UserDto("2", "bob", "Bob", "Johnson")
     ));
+
+    UserClientFactory userClientFactory = Mockito.mock(UserClientFactory.class);
+    Mockito.when(userClientFactory.create(source1)).thenReturn(client1);
+    Mockito.when(userClientFactory.create(source2)).thenReturn(client2);
+
+    UserAggregatorService service = new UserAggregatorService(mockProps, userClientFactory);
 
     List<UserDto> result = service.aggregateUsers();
 
